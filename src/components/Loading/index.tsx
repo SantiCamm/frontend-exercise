@@ -9,13 +9,12 @@ interface Props {
 const Loading = ({ loading, children }: Props) => {
   return loading ? (
     <Container
-      maxWidth="sm"
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "100vh",
+        height: "100%",
       }}
     >
       <Typography variant="h5" gutterBottom>
