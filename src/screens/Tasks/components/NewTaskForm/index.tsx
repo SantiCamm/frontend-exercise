@@ -90,7 +90,7 @@ const NewTaskForm = ({ handleClose, categories, innerRef }: Props) => {
     }
 
     if (values.description && values.description.length > 100) {
-      errors.title = "Máximo 40 caracteres";
+      errors.description = "Máximo 100 caracteres";
     }
 
     if (!values.category) {
