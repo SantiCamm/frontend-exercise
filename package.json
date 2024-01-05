@@ -17,10 +17,13 @@
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
     "axios": "^1.5.1",
+    "formik": "^2.4.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
+    "@types/node": "^20.10.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

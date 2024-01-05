@@ -1,0 +1,5 @@
+const QUERY_KEY_TASKS = "tasks";
+const QUERY_KEY_CATEGORIES = "categories";
+const QUERY_KEY_NEW_TASK = "newTask";
+
+export { QUERY_KEY_TASKS, QUERY_KEY_CATEGORIES, QUERY_KEY_NEW_TASK };
