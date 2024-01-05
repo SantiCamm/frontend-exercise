@@ -2,7 +2,6 @@ import {
   Formik,
   Form as FormComponent,
   Field,
-  ErrorMessage,
   FormikProps,
   FormikValues,
 } from "formik";
@@ -10,15 +9,10 @@ import {
   TextField,
   MenuItem,
   Select,
-  Typography,
   FormControl,
   InputLabel,
 } from "@mui/material";
-import {
-  CATEGORY_FIELD_ID,
-  DESCRIPTION_FIELD_ID,
-  NAME_FIELD_ID,
-} from "src/constants/forms";
+import { CATEGORY_FIELD_ID } from "src/constants/forms";
 import styled from "@emotion/styled";
 import { Category, NewTaskFormError } from "src/types";
 import { QUERY_KEY_TASKS } from "src/constants/querys";
@@ -27,6 +21,8 @@ import { addTask } from "src/services/tasks";
 import Loading from "src/components/Loading";
 import ErrorBoundary from "src/components/ErrorBoundary";
 import { Ref } from "react";
+import FieldError from "./components/FieldError";
+import { textFields } from "./constants";
 
 interface FormValues {
   title: string;
@@ -100,13 +96,12 @@ const NewTaskForm = ({ handleClose, categories, innerRef }: Props) => {
     return errors;
   };
 
-  const ErrorContainer = styled.div`
-    color: red;
-    margin: 4px 0;
-  `;
-
   const Container = styled.div`
     width: 100%;
+  `;
+
+  const TextFieldsContainer = styled.div`
+    margin: 0 0 4px 0;
   `;
 
   return (
@@ -120,49 +115,27 @@ const NewTaskForm = ({ handleClose, categories, innerRef }: Props) => {
             innerRef={innerRef}
           >
             <FormComponent>
-              <div>
-                <Field
-                  name="title"
-                  as={TextField}
-                  fullWidth
-                  id={NAME_FIELD_ID}
-                  label="Título"
-                  type="text"
-                  variant="standard"
-                />
-                <ErrorContainer>
-                  <ErrorMessage
-                    name="title"
-                    render={(error) => (
-                      <Typography variant="caption">{error}</Typography>
-                    )}
-                  />
-                </ErrorContainer>
-              </div>
-              <div>
-                <Field
-                  name="description"
-                  as={TextField}
-                  fullWidth
-                  id={DESCRIPTION_FIELD_ID}
-                  label="Descripción"
-                  type="text"
-                  variant="standard"
-                  sx={{ margin: "4px 0" }}
-                />
-                <ErrorContainer>
-                  <ErrorMessage
-                    name="description"
-                    render={(error) => (
-                      <Typography variant="caption">{error}</Typography>
-                    )}
-                  />
-                </ErrorContainer>
-              </div>
+              <TextFieldsContainer>
+                {textFields.map((field) => (
+                  <>
+                    <Field
+                      name={field.name}
+                      as={TextField}
+                      fullWidth
+                      id={field.id}
+                      label={field.label}
+                      type="text"
+                      variant="standard"
+                      sx={field.sx}
+                    />
+                    <FieldError name={field.name} />
+                  </>
+                ))}
+              </TextFieldsContainer>
               <div>
                 <FormControl
                   variant="standard"
-                  sx={{ width: "100%", marginTop: 1 }}
+                  sx={{ width: "100%", marginTop: "2px" }}
                 >
                   <InputLabel id="demo-simple-select-filled-label">
                     Categoría
@@ -181,14 +154,7 @@ const NewTaskForm = ({ handleClose, categories, innerRef }: Props) => {
                     ))}
                   </Field>
                 </FormControl>
-                <ErrorContainer>
-                  <ErrorMessage
-                    name="category"
-                    render={(error) => (
-                      <Typography variant="caption">{error}</Typography>
-                    )}
-                  />
-                </ErrorContainer>
+                <FieldError name="category" />
               </div>
             </FormComponent>
           </Formik>

@@ -73,13 +73,13 @@ const Tasks = () => {
               items={pendingTasks}
               renderItem={renderTask}
               title="Pendientes"
-              emptyListMessage={"No hay tareas para mostrar"}
+              emptyListMessage={"No hay tareas pendientes para mostrar"}
             />
             <SimpleList<TaskType>
               items={finishedTasks}
               renderItem={renderTask}
               title="Terminadas"
-              emptyListMessage={"No hay tareas para mostrar"}
+              emptyListMessage={"No hay tareas terminadas para mostrar"}
             />
           </ListContainer>
           <Fab
